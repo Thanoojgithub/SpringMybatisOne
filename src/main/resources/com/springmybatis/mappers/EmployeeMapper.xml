@@ -4,5 +4,16 @@
 
 <mapper namespace="com.springmybatis.mappers.EmployeeMapper">
 
-	
+
+	<resultMap id="getEmployeeResult" type="com.springmybatis.beans.Employee">
+		<result property="eId" column="EID" />
+		<result property="eName" column="NAME" />
+	</resultMap>
+
+	<select id="getEmployee" parameterType="int" resultMap="getEmployeeResult">
+		SELECT *
+		FROM MYDB.EMPLOYEE E
+		WHERE E.EID = #{eId}
+	</select>
+
 </mapper>

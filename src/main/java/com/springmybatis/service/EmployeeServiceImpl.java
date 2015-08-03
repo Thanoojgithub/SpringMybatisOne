@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.springmybatis.beans.Employee;
 import com.springmybatis.dao.EmployeeDao;
 
-@Component
+@Component("employeeService")
 public class EmployeeServiceImpl implements EmployeeService	 {
 
 	@Autowired
