@@ -1,5 +1,7 @@
 package com.springmybatis.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService	 {
 		return employee;
 	}
 
+	@Override
+	public Employee getEmployeeDetails(int eId) throws SQLException {
+		return employeeDao.getEmployeeDetails(eId);
+	}
+	
 }

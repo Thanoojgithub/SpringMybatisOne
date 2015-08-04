@@ -11,7 +11,8 @@ public class App {
 
 		try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml")){
 			EmployeeService employeeService = (EmployeeService) context.getBean("employeeService");
-			System.out.println(employeeService.getEmployee(2));
+			System.out.println(employeeService.getEmployee(1));
+			System.out.println(employeeService.getEmployeeDetails(2));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
