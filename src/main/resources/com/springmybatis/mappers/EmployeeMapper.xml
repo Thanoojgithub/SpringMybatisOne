@@ -18,8 +18,8 @@
 		<result property="eId" column="EID" />
 		<result property="eName" column="ENAME" />
 	</resultMap>
-	<select id="getEmployeeDetails" resultMap="employeeResultSet"
-		statementType="CALLABLE"> { CALL mydb.getEmployee(#{eId, mode=IN, jdbcType=BIGINT})}
+	<select id="getEmployeeDetails" resultMap="employeeResultSet" statementType="CALLABLE">
+		{ CALL getEmployee(#{eId, mode=IN, jdbcType=BIGINT})}
 	</select>
 
 </mapper>

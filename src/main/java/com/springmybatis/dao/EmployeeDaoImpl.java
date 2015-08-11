@@ -41,40 +41,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		prepareStatement.setInt(1, eId);
 		rs[0] = prepareStatement.executeQuery();
 	}
-	
+
 	public Employee getEmployeeDetails(int eId) throws SQLException {
 		Employee employee = null;
 		employee = getMapperFromSQLSession().getEmployeeDetails(eId);
 		return employee;
 	}
 
-	/*public Employee getEmployeeDetails(int eId) throws SQLException {
-		Connection connection = sqlSession.getConnection();
-		Employee employee = new Employee();
-		CallableStatement cs = connection.prepareCall("{ call mydb.getEmployee(?)}");
-		cs.setInt(1, eId);
-		boolean hasResults = cs.execute();
-		while (hasResults) {
-			ResultSet rs = cs.getResultSet();
-			while (rs.next()) {
-				employee.seteId(rs.getInt("EID"));
-				employee.seteName(rs.getString("ENAME"));
-			}
-			rs.close();
-		}
-		return employee;
-	}*/
-	
 	/*
-	 * CREATE PROCEDURE mydb.getEmployee(IN eId BIGINT)
-PARAMETER STYLE JAVA
-LANGUAGE JAVA
-READS SQL DATA
-DYNAMIC RESULT SETS 1
-EXTERNAL NAME 'EmployeeDaoImpl.getEmployee';
-
-drop procedure mydb.GETEMPLOYEE;
-
-select * from mydb.employee e where e.eid=1;
+	 * CALL getEmployee (6)
+	 * 
+	 * DELIMITER $$ CREATE PROCEDURE getEmployee (IN user_id BIGINT)
+	 * BEGIN
+	 * SELECT * FROM mydb.user u WHERE u.user_id = user_id;
+	 * END $$
+	 * 
+	 * DROP PROCEDURE getEmployee;
 	 */
+
 }
