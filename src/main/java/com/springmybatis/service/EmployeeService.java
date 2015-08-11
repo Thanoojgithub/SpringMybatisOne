@@ -1,6 +1,8 @@
 package com.springmybatis.service;
 
-import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.springmybatis.beans.Employee;
 
@@ -8,6 +10,14 @@ public interface EmployeeService {
 	
 	Employee getEmployee (Integer eId); 
 	
-	Employee getEmployeeDetails(int eId) throws SQLException;
+	List<Employee> getEmployeeByName(String eName);
+	
+	void insertEmployee(Employee employee);
+	
+	List<Employee> getEmployees();
+	
+	boolean updateEmployee(@Param("employee") Employee employee);
+
+	boolean deleteEmployee(Integer geteId);
 
 }

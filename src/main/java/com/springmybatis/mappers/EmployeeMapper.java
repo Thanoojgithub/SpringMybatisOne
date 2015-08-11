@@ -1,13 +1,23 @@
 package com.springmybatis.mappers;
 
-import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.springmybatis.beans.Employee;
 
 public interface EmployeeMapper {
 
-	Employee getEmployee(Integer eId);
+	Employee getEmployee(@Param("eId") Integer eId);
 	
-	Employee getEmployeeDetails(int eId) throws SQLException;
+	List<Employee> getEmployeeByName(@Param("eName") String eName);
+	
+	void insertEmployee(@Param("employee") Employee employee);
+	
+	List<Employee> getEmployees();
+	
+	boolean updateEmployee(@Param("employee") Employee employee);
+
+	boolean deleteEmployee(@Param("eId") Integer eId);
 
 }

@@ -1,9 +1,6 @@
 package com.springmybatis.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
@@ -24,36 +21,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		this.sqlSession = sqlSession;
 	}
 
-	public Employee getEmployee(Integer eId) {
-		Employee employee = null;
-		employee = getMapperFromSQLSession().getEmployee(eId);
-		return employee;
-	}
-
 	private EmployeeMapper getMapperFromSQLSession() {
 		return getSqlSession().getMapper(EmployeeMapper.class);
 	}
 
-	public void getEmployee(int eId, ResultSet[] rs) throws SQLException {
-		Connection connection = sqlSession.getConnection();
-		PreparedStatement prepareStatement = connection
-				.prepareStatement("select * from mydb.employee e where e.eid = ?");
-		prepareStatement.setInt(1, eId);
-		rs[0] = prepareStatement.executeQuery();
+	@Override
+	public Employee getEmployee(Integer eId) {
+		return getMapperFromSQLSession().getEmployee(eId);
 	}
 
-	public Employee getEmployeeDetails(int eId) throws SQLException {
-		Employee employee = null;
-		employee = getMapperFromSQLSession().getEmployeeDetails(eId);
-		return employee;
+	@Override
+	public List<Employee> getEmployeeByName(String eName) {
+		return getMapperFromSQLSession().getEmployeeByName(eName);
+	}
+
+	@Override
+	public void insertEmployee(Employee employee) {
+		getMapperFromSQLSession().insertEmployee(employee);
+	}
+
+	@Override
+	public List<Employee> getEmployees() {
+		return getMapperFromSQLSession().getEmployees();
+	}
+
+	@Override
+	public boolean updateEmployee(Employee employee) {
+		return getMapperFromSQLSession().updateEmployee(employee);
+	}
+
+	@Override
+	public boolean deleteEmployee(Integer geteId) {
+		return getMapperFromSQLSession().deleteEmployee(geteId);
+		
 	}
 
 	/*
-	 * CALL getEmployee (6)
+	 * CALL getEmployeeByName ("seeta")
 	 * 
-	 * DELIMITER $$ CREATE PROCEDURE getEmployee (IN user_id BIGINT)
-	 * BEGIN
-	 * SELECT * FROM mydb.user u WHERE u.user_id = user_id;
+	 * DELIMITER $$ 
+	 * CREATE PROCEDURE getEmployeeByName (IN eName VARCHAR(30))
+	 * BEGIN 
+	 * 		SELECT * FROM mydb.employee e WHERE e.eName = eName;
 	 * END $$
 	 * 
 	 * DROP PROCEDURE getEmployee;

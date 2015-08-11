@@ -1,6 +1,6 @@
 package com.springmybatis.service;
 
-import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,14 +15,33 @@ public class EmployeeServiceImpl implements EmployeeService	 {
 	private EmployeeDao employeeDao;
 	
 	public Employee getEmployee(Integer eId) {
-		Employee employee = null;
-		employee = employeeDao.getEmployee(eId);
-		return employee;
+		return employeeDao.getEmployee(eId);
 	}
 
 	@Override
-	public Employee getEmployeeDetails(int eId) throws SQLException {
-		return employeeDao.getEmployeeDetails(eId);
+	public List<Employee> getEmployeeByName(String eName) {
+		return employeeDao.getEmployeeByName(eName);
+	}
+
+	@Override
+	public void insertEmployee(Employee employee) {
+		employeeDao.insertEmployee(employee);
+	}
+
+	@Override
+	public List<Employee> getEmployees() {
+		return employeeDao.getEmployees();
+	}
+
+	@Override
+	public boolean updateEmployee(Employee employee) {
+		return employeeDao.updateEmployee(employee);
+	}
+
+	@Override
+	public boolean deleteEmployee(Integer geteId) {
+		return employeeDao.deleteEmployee(geteId);
+		
 	}
 	
 }

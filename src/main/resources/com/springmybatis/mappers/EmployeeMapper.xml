@@ -5,21 +5,40 @@
 <mapper namespace="com.springmybatis.mappers.EmployeeMapper">
 
 	<resultMap id="getEmployeeResult" type="com.springmybatis.beans.Employee">
-		<result property="eId" column="EID" />
-		<result property="eName" column="NAME" />
-	</resultMap>
-	<select id="getEmployee" parameterType="int" resultMap="getEmployeeResult">
-		SELECT *
-		FROM MYDB.EMPLOYEE E
-		WHERE E.EID = #{eId}
-	</select>
-
-	<resultMap id="employeeResultSet" type="com.springmybatis.beans.Employee">
-		<result property="eId" column="EID" />
+		<id property="eId" column="EID" />
 		<result property="eName" column="ENAME" />
 	</resultMap>
-	<select id="getEmployeeDetails" resultMap="employeeResultSet" statementType="CALLABLE">
-		{ CALL getEmployee(#{eId, mode=IN, jdbcType=BIGINT})}
+	<select id="getEmployee" parameterType="int" resultMap="getEmployeeResult">
+		SELECT * FROM MYDB.EMPLOYEE E WHERE E.EID = #{eId}
 	</select>
 
+	<resultMap id="employeesResultSet" type="com.springmybatis.beans.Employee">
+		<id property="eId" column="EID" />
+		<result property="eName" column="ENAME" />
+	</resultMap>
+	<select id="getEmployeeByName" resultMap="employeesResultSet"
+		statementType="CALLABLE">
+		{ CALL getEmployeeByName(#{eName, mode=IN, jdbcType=VARCHAR})}
+	</select>
+
+	<insert id="insertEmployee" parameterType="com.springmybatis.beans.Employee">
+		INSERT INTO MYDB.EMPLOYEE (ENAME) VALUES (#{employee.eName})
+	</insert>
+
+	<resultMap type="com.springmybatis.beans.Employee" id="getEmployeesMap">
+		<id property="eId" column="EID" />
+		<result property="eName" column="ENAME" />
+	</resultMap>
+	<select id="getEmployees" resultMap="getEmployeesMap">
+		{ CALL getEmployees()}
+	</select>
+
+	<update id="updateEmployee" parameterType="com.springmybatis.beans.Employee">
+		UPDATE MYDB.EMPLOYEE E SET E.ENAME = #{employee.eName} WHERE E.EID = #{employee.eId} 
+	</update>
+	
+	<delete id="deleteEmployee">
+		DELETE FROM MYDB.EMPLOYEE WHERE EID = #{eId} 
+	</delete>
+	
 </mapper>
