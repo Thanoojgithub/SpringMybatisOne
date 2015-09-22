@@ -2,9 +2,11 @@ package com.springmybatis.beans;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
 @Component
+@Alias("employee")
 public class Employee implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

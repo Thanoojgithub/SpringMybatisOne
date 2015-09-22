@@ -41,7 +41,11 @@ public class EmployeeServiceImpl implements EmployeeService	 {
 	@Override
 	public boolean deleteEmployee(Integer geteId) {
 		return employeeDao.deleteEmployee(geteId);
-		
+	}
+
+	@Override
+	public Employee getEmployeeByEid(Integer eId) {
+		return employeeDao.getEmployeeByEid(eId);
 	}
 	
 }

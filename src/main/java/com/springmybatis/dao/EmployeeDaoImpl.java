@@ -2,6 +2,8 @@ package com.springmybatis.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee getEmployee(Integer eId) {
+		Employee employee = this.sqlSession.selectOne("com.springmybatis.mappers.EmployeeMapper.getEmployee", 1);
+		System.out.println("EmployeeDaoImpl.getEmployee() :: " + employee);
 		return getMapperFromSQLSession().getEmployee(eId);
 	}
 
@@ -37,7 +41,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public void insertEmployee(Employee employee) {
-		getMapperFromSQLSession().insertEmployee(employee);
+		//getMapperFromSQLSession().insertEmployeeUsingIentity(employee);
+		getMapperFromSQLSession().insertEmployee(employee);	
 	}
 
 	@Override
@@ -54,6 +59,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public boolean deleteEmployee(Integer geteId) {
 		return getMapperFromSQLSession().deleteEmployee(geteId);
 		
+	}
+
+	@Override
+	public Employee getEmployeeByEid(Integer eId) {
+		return getMapperFromSQLSession().getEmployeeByEid(eId);
 	}
 
 	/*

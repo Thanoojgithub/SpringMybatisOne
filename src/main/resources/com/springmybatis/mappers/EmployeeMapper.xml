@@ -34,7 +34,12 @@
 	</select>
 
 	<update id="updateEmployee" parameterType="com.springmybatis.beans.Employee">
-		UPDATE MYDB.EMPLOYEE E SET E.ENAME = #{employee.eName} WHERE E.EID = #{employee.eId} 
+		<if test="employee != null">
+			UPDATE MYDB.EMPLOYEE E SET E.ENAME = #{employee.eName}
+			<if test="employee != null and employee.eId != null">
+				WHERE E.EID = #{employee.eId}
+			</if>
+		</if>
 	</update>
 	
 	<delete id="deleteEmployee">

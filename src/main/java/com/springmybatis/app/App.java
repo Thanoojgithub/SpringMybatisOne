@@ -18,6 +18,9 @@ public class App {
 			Employee employeeById = employeeService.getEmployee(1);
 			System.out.println(employeeById);
 			
+			employeeById = employeeService.getEmployeeByEid(1);
+			System.out.println("employeeService.getEmployeeByEid :: " + employeeById);
+			
 			// INSERT - ID AUTO_INCREMENT
 			Employee insertEmployee = new Employee();
 			insertEmployee.seteName("krishna");

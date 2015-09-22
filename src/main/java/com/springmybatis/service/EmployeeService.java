@@ -8,7 +8,9 @@ import com.springmybatis.beans.Employee;
 
 public interface EmployeeService {
 	
-	Employee getEmployee (Integer eId); 
+	Employee getEmployee (Integer eId);
+	
+	Employee getEmployeeByEid (Integer eId);
 	
 	List<Employee> getEmployeeByName(String eName);
 	
